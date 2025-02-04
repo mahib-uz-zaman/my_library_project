@@ -1,0 +1,36 @@
+<!-- books/templates/edit_book.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card">
+  <div class="card-header bg-warning text-dark">
+    <h2 class="mb-0">Edit Book</h2>
+  </div>
+  <div class="card-body">
+    {% if error %}
+      <div class="alert alert-danger">{{ error }}</div>
+    {% endif %}
+    <form method="post">
+      {% csrf_token %}
+      <div class="mb-3">
+        <label for="title" class="form-label">Title:</label>
+        <input type="text" name="title" id="title" value="{{ book.title }}" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="author" class="form-label">Author:</label>
+        <input type="text" name="author" id="author" value="{{ book.author }}" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="published_date" class="form-label">Published Date:</label>
+        <input type="text" name="published_date" id="published_date" value="{{ book.published_date }}" class="form-control">
+      </div>
+      <div class="mb-3">
+        <label for="summary" class="form-label">Summary:</label>
+        <textarea name="summary" id="summary" rows="5" class="form-control">{{ book.summary }}</textarea>
+      </div>
+      <button type="submit" class="btn btn-primary">Update Book</button>
+      <a href="{% url 'list_books' %}" class="btn btn-secondary">Cancel</a>
+    </form>
+  </div>
+</div>
+{% endblock content %}
